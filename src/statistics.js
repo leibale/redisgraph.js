@@ -4,8 +4,8 @@ const Label = require("./label");
 class Statistics {
     /**
      * Builds a query statistics object out of raw data.
-     * @constructor
-     * @param {object[]} raw - raw data.
+     *
+     * @param {Object[]} raw - raw data.
      */
 	constructor(raw) {
 		this._raw = raw;
@@ -13,7 +13,9 @@ class Statistics {
 
     /**
      * Returns a statistics value according to the statistics label.
+     *
      * @param {import('./label')} label - Statistics label.
+     * @returns {string} string representation of the value
      */
 	getStringValue(label) {
 		return this.getStatistics()[label];
@@ -21,7 +23,8 @@ class Statistics {
 
 	/**
 	 * Return the query statistics
-	 * @return {Object<string, string>} statistics object
+	 *
+	 * @returns {Object<string, string>} statistics object
 	 */
 	getStatistics() {
 		if (!this._statistics) {
@@ -36,7 +39,8 @@ class Statistics {
 
     /**
      * Returns the integer value of a requested label.
-     * @param {import('./label')} label
+     *
+     * @param {import('./label')} label the column label of the requested value
      * @returns {number} The actual value if exists, 0 otherwise. (integer)
      */
 	getIntValue(label) {
@@ -45,10 +49,11 @@ class Statistics {
 	}
 
      /**
-     * Returns the float value of a requested label.
-     * @param {import('./label')} label
-     * @returns {number} The actual value if exists, 0 otherwise.
-     */
+      * Returns the float value of a requested label.
+      *
+      * @param {import('./label')} label the column label of the requested value
+      * @returns {number} The actual value if exists, 0 otherwise.
+      */
 	getFloatValue(label) {
 		let value = this.getStringValue(label);
 		return value ? parseFloat(value) : 0;

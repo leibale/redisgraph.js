@@ -5,7 +5,7 @@
 class Edge {
     /**
      * Builds an Edge object.
-     * @constructor
+     *
      * @param {import('./node')} srcNode - Source node of the edge.
      * @param {string} relation - Relationship type of the edge.
      * @param {import('./node')} destNode - Destination node of the edge.
@@ -21,14 +21,16 @@ class Edge {
 
     /**
      * Sets the edge ID.
+     *
      * @param {number} id (integer)
+     * @returns {undefined}
      */
 	setId(id) {
 		this.id = id;
     }
     
     /**
-     * @returns The string representation of the edge.
+     * @returns {string} The string representation of the edge.
      */
 	toString() {
 		return JSON.stringify(this);

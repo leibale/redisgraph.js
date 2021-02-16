@@ -13,8 +13,8 @@ class Graph {
       * See: node_redis for more options on createClient 
       * 
       * @param {string} graphId the graph id
-      * @param {string | import('redis').RedisClient} [host] Redis host or node_redis client
-      * @param {string | number} [port] Redis port (integer)
+      * @param {string|import('redis').RedisClient} [host] Redis host or node_redis client
+      * @param {string|number} [port] Redis port (integer)
       * @param {Object} [options] node_redis options
       */
 	constructor(graphId, host, port, options) {
@@ -35,6 +35,8 @@ class Graph {
     }
     /**
      * Closes the client.
+     *
+     * @returns {undefined}
      */
     close() {
         this._client.quit();
@@ -43,8 +45,9 @@ class Graph {
 	/**
 	 * Auxiliary function to extract string(s) data from procedures such as:
 	 * db.labels, db.propertyKeys and db.relationshipTypes
+	 *
 	 * @param {import('./resultSet')} resultSet - a procedure result set
-     * @returns {string[]} strings array.
+	 * @returns {string[]} strings array.
 	 */
 	_extractStrings(resultSet) {
 		var strings = [];
@@ -56,7 +59,8 @@ class Graph {
 
     /**
      * Transforms a parameter value to string.
-     * @param {*} paramValue
+     *
+     * @param {*} paramValue native parameter value
      * @returns {string} the string representation of paramValue.
      */
 	paramToString(paramValue) {
@@ -82,8 +86,9 @@ class Graph {
 
 	/**
 	 * Extracts parameters from dictionary into cypher parameters string.
+	 *
 	 * @param {Map} params parameters dictionary.
-	 * @return {string} a cypher parameters string.
+	 * @returns {string} a cypher parameters string.
 	 */
 	buildParamsHeader(params) {
 		let paramsArray = ["CYPHER"];
@@ -98,7 +103,8 @@ class Graph {
 
 	/**
 	 * Execute a Cypher query
-     * @async
+	 *
+	 * @async
 	 * @param {string} query Cypher query
 	 * @param {Map} [params] Parameters map
 	 * @returns {Promise<import('./resultSet')>} a promise contains a result set
@@ -118,7 +124,8 @@ class Graph {
 
 	/**
 	 * Deletes the entire graph
-     * @async
+	 *
+	 * @async
 	 * @returns {Promise<import('./resultSet')>} a promise contains the delete operation running time statistics
 	 */
 	async deleteGraph() {
@@ -133,6 +140,7 @@ class Graph {
 
 	/**
 	 * Calls procedure
+	 *
 	 * @param {string} procedure Procedure to call
 	 * @param {string[]} [args] Arguments to pass
 	 * @param {string[]} [y] Yield outputs
@@ -145,7 +153,8 @@ class Graph {
 
 	/**
 	 * Retrieves all labels in graph.
-     * @async
+	 *
+	 * @async
 	 */
 	async labels() {
 		if (this._labelsPromise == undefined) {
@@ -163,7 +172,8 @@ class Graph {
 
 	/**
 	 * Retrieves all relationship types in graph.
-     * @async
+	 *
+	 * @async
 	 */
 	async relationshipTypes() {
 		if (this._relationshipPromise == undefined) {
@@ -181,7 +191,8 @@ class Graph {
 
 	/**
 	 * Retrieves all properties in graph.
-     * @async
+	 *
+	 * @async
 	 */
 	async propertyKeys() {
 		if (this._propertyPromise == undefined) {
@@ -199,6 +210,7 @@ class Graph {
 
 	/**
 	 * Retrieves label by ID.
+	 *
 	 * @param {number} id internal ID of label. (integer)
 	 * @returns {string} String label.
 	 */
@@ -208,7 +220,8 @@ class Graph {
 
 	/**
 	 * Retrieve all the labels from the graph and returns the wanted label
-     * @async
+	 *
+	 * @async
 	 * @param {number} id internal ID of label. (integer)
 	 * @returns {Promise<string>} String label.
 	 */
@@ -219,6 +232,7 @@ class Graph {
 
 	/**
 	 * Retrieves relationship type by ID.
+	 *
 	 * @param {number} id internal ID of relationship type. (integer)
 	 * @returns {string} relationship type.
 	 */
@@ -228,7 +242,8 @@ class Graph {
 
 	/**
 	 * Retrieves al the relationships types from the graph, and returns the wanted type
-     * @async
+	 *
+	 * @async
 	 * @param {number} id internal ID of relationship type. (integer)
 	 * @returns {Promise<string>} String relationship type.
 	 */
@@ -239,6 +254,7 @@ class Graph {
 
 	/**
 	 * Retrieves property name by ID.
+	 *
 	 * @param {number} id internal ID of property. (integer)
 	 * @returns {string} String property.
 	 */
@@ -248,7 +264,8 @@ class Graph {
 
 	/**
 	 * Retrieves al the properties from the graph, and returns the wanted property
-     * @asyncTODO
+	 *
+	 * @async
 	 * @param {number} id internal ID of property. (integer)
 	 * @returns {Promise<string>} String property.
 	 */

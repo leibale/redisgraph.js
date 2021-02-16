@@ -1,7 +1,6 @@
 "use strict";
 class Path {
     /**
-     * @constructor
      * @param {import('./node')[]} nodes - path's node list.
      * @param {import('./edge')[]} edges - path's edge list.
      */
@@ -12,6 +11,7 @@ class Path {
 
     /**
      * Returns the path's nodes as list.
+     *
      * @returns {import('./node')[]} path's nodes.
      */
 	get Nodes() {
@@ -20,6 +20,7 @@ class Path {
 
     /**
      * Returns the path's edges as list.
+     *
      * @returns {import('./edge')[]} paths' edges.
      */
 	get Edges() {
@@ -28,6 +29,7 @@ class Path {
 
     /**
      * Returns a node in a given index.
+     *
      * @param {number} index (integer)
      * @returns {import('./node')} node in the given index.
      */
@@ -37,6 +39,7 @@ class Path {
 
     /**
      * Returns an edge in a given index.
+     *
      * @param {number} index (integer)
      * @returns {import('./edge')} edge in a given index.
      */
@@ -46,6 +49,7 @@ class Path {
 
     /**
      * Returns the path's first node.
+     *
      * @returns {import('./node')} first node.
      */
 	get firstNode() {
@@ -54,6 +58,7 @@ class Path {
 
     /**
      * Returns the last node of the path.
+     *
      * @returns {import('./node')} last node.
      */
 	get lastNode() {
@@ -62,6 +67,7 @@ class Path {
 
     /**
      * Returns the amount of nodes in th path.
+     *
      * @returns {number} amount of nodes. (integer)
      */
 	get nodeCount() {
@@ -70,6 +76,7 @@ class Path {
 
     /**
      * Returns the amount of edges in the path.
+     *
      * @returns {number} amount of edges. (integer)
      */
 	get edgeCount() {
@@ -78,6 +85,7 @@ class Path {
 
     /**
      * Returns the path string representation.
+     *
      * @returns {string} path string representation.
      */
 	toString() {

@@ -1,6 +1,7 @@
 "use strict";
 /**
  * Different Statistics labels
+ *
  * @readonly
  * @enum {string}
  */

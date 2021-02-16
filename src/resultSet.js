@@ -41,8 +41,8 @@ const ResultSetValueTypes = {
 class ResultSet {
 	/**
 	 * Builds an empty ResultSet object.
-	 * @constructor
-	 * @param {import('./graph')} graph
+	 *
+	 * @param {import('./graph')} graph instance of a `Graph` which call the query that yields the `ResultSet`
 	 */
 	constructor(graph) {
 		this._graph = graph; //_graph is graph api
@@ -54,9 +54,11 @@ class ResultSet {
 
 	/**
 	 * Parse raw response data to ResultSet object.
+	 *
 	 * @async
-	 * @param {object[]} resp  - raw response representation - the raw representation of response is at most 3 lists of objects.
+	 * @param {Object[]} resp - raw response representation - the raw representation of response is at most 3 lists of objects.
 	 *                    The last list is the statistics list.
+	 * @returns {ResultSet} the instance after parsing the response
 	 */
 	async parseResponse(resp) {
 		if (Array.isArray(resp)) {
@@ -77,8 +79,9 @@ class ResultSet {
 
 	/**
 	 * Parse a raw response body into header an records.
+	 *
 	 * @async
-	 * @param {object[]} resp raw response
+	 * @param {Object[]} resp raw response
 	 */
 	async parseResults(resp) {
 		this.parseHeader(resp[0]);
@@ -89,7 +92,8 @@ class ResultSet {
 	 * A raw representation of a header (query response schema) is a list.
 	 * Each entry in the list is a tuple (list of size 2).
 	 * tuple[0] represents the type of the column, and tuple[1] represents the name of the column.
-	 * @param {object[]} rawHeader raw header
+	 *
+	 * @param {Object[]} rawHeader raw header
 	 */
 	parseHeader(rawHeader) {
 		// An array of column name/column type pairs.
@@ -104,8 +108,9 @@ class ResultSet {
 	/**
 	 * The raw representation of response is at most 3 lists of objects. rawResultSet[1] contains the data records.
 	 * Each entry in the record can be either a node, an edge or a scalar
+	 *
 	 * @async
-	 * @param {object[]} rawResultSet raw result set representation
+	 * @param {Object[]} rawResultSet raw result set representation
 	 */
 	async parseRecords(rawResultSet) {
 		let result_set = rawResultSet[1];
@@ -138,9 +143,10 @@ class ResultSet {
 
 	/**
 	 * Parse raw entity properties representation into a Map
+	 *
 	 * @async
-	 * @param {object[]} props raw properties representation
-	 * @returns {Promise<object>} Map with the parsed properties.
+	 * @param {Object[]} props raw properties representation
+	 * @returns {Promise<Object>} Map with the parsed properties.
 	 */
 	async parseEntityProperties(props) {
 		// [[name, value, value type] X N]
@@ -169,8 +175,9 @@ class ResultSet {
 
 	/**
 	 * Parse raw node representation into a Node object.
+	 *
 	 * @async
-	 * @param {object[]} cell raw node representation.
+	 * @param {Object[]} cell raw node representation.
 	 * @returns {Promise<import('./node')>} Node object.
 	 */
 	async parseNode(cell) {
@@ -199,8 +206,9 @@ class ResultSet {
 
 	/**
 	 * Parse a raw edge representation into an Edge object.
+	 *
 	 * @async
-	 * @param {object[]} cell raw edge representation
+	 * @param {Object[]} cell raw edge representation
 	 * @returns {Promise<import('./edge')>} Edge object.
 	 */
 	async parseEdge(cell) {
@@ -234,9 +242,10 @@ class ResultSet {
 
 	/**
 	 * Parse and in-place replace raw array into an array of values or objects.
+	 *
 	 * @async
-	 * @param {object[]} rawArray raw array representation
-	 * @returns {Promise<object[]>} Parsed array.
+	 * @param {Object[]} rawArray raw array representation
+	 * @returns {Promise<Object[]>} Parsed array.
 	 */
 	async parseArray(rawArray) {
 		for (var i = 0; i < rawArray.length; i++) {
@@ -247,8 +256,9 @@ class ResultSet {
 
 	/**
 	 * Parse a raw path representation into Path object.
+	 *
 	 * @async
-	 * @param {object[]} rawPath raw path representation
+	 * @param {Object[]} rawPath raw path representation
 	 * @returns {Promise<import('./path')>} Path object.
 	 */
 	async parsePath(rawPath) {
@@ -259,9 +269,10 @@ class ResultSet {
 
 	/**
 	 * Parse a raw map representation into Map object.
+	 *
 	 * @async
-	 * @param {object[]} rawMap raw map representation
-	 * @returns {Promise<object>} Map object.
+	 * @param {Object[]} rawMap raw map representation
+	 * @returns {Promise<Object>} Map object.
 	 */
 	async parseMap(rawMap) {
 		let m = {};
@@ -275,9 +286,10 @@ class ResultSet {
 
 	/**
 	 * Parse a raw value into its actual value.
+	 *
 	 * @async
-	 * @param {object[]} cell raw value representation
-	 * @returns {Promise<object>} Actual value - scalar, array, Node, Edge, Path
+	 * @param {Object[]} cell raw value representation
+	 * @returns {Promise<Object>} Actual value - scalar, array, Node, Edge, Path
 	 */
 	async parseScalar(cell) {
 		let scalar_type = cell[0];
